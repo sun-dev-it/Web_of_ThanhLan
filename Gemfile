@@ -14,7 +14,7 @@ gem "will_paginate",              "3.1.8"
 gem "jquery-rails"
 gem "bootstrap-will_paginate",    "1.0.0"
 gem "faker",                      "2.1.2"
-gem "webpacker"
+
 gem "bcrypt",                     "3.1.13"
 gem "sass-rails",                 "~> 6.0.0"
 gem 'bootstrap-sass',             "3.4.1"

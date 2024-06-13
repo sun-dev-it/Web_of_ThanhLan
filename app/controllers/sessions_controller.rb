@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
         if user && user.authenticate(params[:session][:password])
             log_in user
             flash[:success] = "Hi " + user.name + "!"
-            redirect_back_or root_url
+            redirect_back_or root_path
         else
             flash[:danger] = "Email hoac mat khau sai"
             redirect_to login_path
