@@ -1,0 +1,18 @@
+<div>
+        <%= image_tag @user.avatar if @user.avatar.attached? %>
+        <%= link_to @user.name, user_path(@user) %>
+        <% if current_user?(@user) %>
+            <%= render 'users/avatar' %>
+        <% end %>
+
+        <hr>
+        
+        <p> 
+            <b>Số bài đăng:</b> <%= @user.snapshots.count %>
+        </p>
+        
+            <% if current_user?(@user) %>
+                <%= link_to "Chỉnh sửa thông tin", edit_user_path(current_user) %>
+            <% end %>
+        <br>
+</div>

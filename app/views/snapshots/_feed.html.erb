@@ -1,0 +1,68 @@
+<% if @feed_items.any? %>
+    <% @feed_items.each do |item| %>
+        <div>
+            <div class="row">
+                <div class="col-12">
+                    <p>
+                    <%= link_to item.user do %>
+                        <%= image_tag item.user.avatar if item.user.avatar.attached? %>
+                    <% end %>
+                    </p>
+                    <p><%= item.user.name %>
+                    <%= time_ago_in_words(item.created_at) %>
+                    <% if current_user.admin? %>
+                        <%= link_to " Delete", item, method: :delete %>
+                    <% end %>
+                    </p>
+                </div>
+                <div class="col-12">
+                    <p><%= item.content %></p>
+                    <%= image_tag item.image if item.image.attached? %> 
+                </div>
+            </div>
+
+            <hr> 
+
+            <div class="row">
+                <span class="col-12">Comment</span>
+                <% item.comments.each do |comment| %>
+                    <div class="col-1">
+                        <%= link_to comment.user do %>
+                            <%= image_tag comment.user.avatar if comment.user.avatar.attached? %>
+                        <% end %>
+                    </div>
+                    <div class="col-9">
+                        <div>
+                            <p><strong><%= comment.user.name %></strong></p>
+                            <%= comment.content %>
+                        </div>
+                    </div>
+                        <%= link_to "Delete", snapshot_comment_path(item, comment), method: :delete, data: { confirm: "Xóa bình luận?" } %>
+                    </div>
+                <% end %>
+            </div>
+
+            <div class="row">
+                <div class="col-2">
+                    <%= image_tag current_user.avatar if current_user.avatar.attached? %>
+                </div>
+                <div class="col-10">
+                        <%= form_with(model: [item, Comment.new], url: snapshot_comments_path(item)) do |form| %>
+                            <div class="row">
+                                <div class="col-12">
+                                    <%= form.text_area :content %>
+                                </div>
+                                <div class="col-8"></div>
+                                <div class="col-4">
+                                    <%= form.submit 'Comment'%>
+                                </div>
+                            </div>
+                        <% end %>
+                </div>
+            </div>
+
+
+        </div>
+      <% end %>
+<% end %>
+
