@@ -3,9 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby                              "3.2.1"
 gem "rails",                      "~> 7.0.8"
-gem "pg", "~> 1.1"
-gem "pg", "~> 1.1"
 gem "font-awesome-sass"
+gem "sqlite3", "~> 1.4"
 gem "aws-sdk-s3",                 "1.46.0", require: false
 gem "image_processing",           "1.9.3"
 gem "mini_magick",                "4.9.5"
