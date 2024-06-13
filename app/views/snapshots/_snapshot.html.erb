@@ -1,0 +1,92 @@
+<div id="snapshot-<%= snapshot.id %>">
+    <div class="row">
+        <div class="col-2">
+            <%= link_to snapshot.user do %>
+                <div">
+                    <%= image_tag @user.avatar if @user.avatar.attached? %>
+                </div>
+            <% end %>
+        </div>
+        <div class="col-10">
+            <div class="row">
+                <div class="col-10">
+                    <%= @user.name %>
+                </div>
+
+                <div class="col-2"> 
+                    <ul>
+                        <% if current_user?(snapshot.user) or current_user.admin? %>
+                            <li><i class="fa-solid fa-trash"></i> <%= link_to " Xóa", snapshot, method: :delete, style:"color: #000000; background: none;" %><li>
+                        <% end %>
+                    </ul>
+                </div>
+
+                <div class="col-12">
+                    <small><i class="fa-solid fa-clock" style="color: #404040;"></i>  <%= time_ago_in_words(snapshot.created_at) %> </small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <p><%= snapshot.content %></p>
+            <div> 
+                <%= image_tag snapshot.image if snapshot.image.attached? %>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    
+    <div class="row">
+        <span class="col-12">Comment</span>
+        <% snapshot.comments.each do |comment| %>
+            <div class="col-1 fix_padding_col_cmt">
+                <%= link_to comment.user do %>
+                    <%= image_tag comment.user.avatar, class:"avt_comment" if comment.user.avatar.attached? %>
+                <% end %>
+            </div>
+            <div class="col-9">
+                <div>
+                    <li><strong><%= comment.user.name %></strong></li>
+                    <%= comment.content %>
+                </div>
+            </div>
+            <div class="col-2">
+                <div>
+                    <div>
+                        <%= link_to "Delete", snapshot_comment_path(snapshot, comment), method: :delete, data: { confirm: "Xóa bình luận?" } %>
+                    </div>
+                </div>
+            </div>
+        <% end %>
+    </div>
+    
+    <hr>
+
+    <div class="row">
+        <div class="col-2">
+            <div class="avatar_wrapper">
+                <%= image_tag current_user.avatar if current_user.avatar.attached? %>
+            </div>
+        </div>
+        <div class="col-10">
+            <div class="form_comment">
+                <%= form_with(model: [snapshot, Comment.new], url: snapshot_comments_path(snapshot)) do |form| %>
+                    <div class="row">
+                        <div class="col-12">
+                            <%= form.text_area :content %>
+                        </div>
+                        <div class="col-8"></div>
+                        <div class="col-4">
+                            <span><%= form.submit 'Bình luận' %></span>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<br>

@@ -1,0 +1,10 @@
+<div class="row" id="<%= dom_id user %>">
+
+  <div class="col-6"><%= link_to user.name, user %></div>
+  <div class="col-6">
+    <% if current_user.admin? %>
+      <%= link_to "delete", user, method: :delete, data: { confirm: "chac chan xoa?" } %>
+    <% end %>
+  </div>
+  <hr>
+</div>

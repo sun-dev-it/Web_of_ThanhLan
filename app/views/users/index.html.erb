@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-1"></div>
+  <div class="col-2"><h5 class="my_container box_shadow">Quản lí người dùng</h5></div>
+  <div class="col-7 my_container">
+    <div class="row list_users">
+      <h5 class="col-1"> Ảnh </h5>
+      <h5 class="col-3"> Tên </h5>
+      <h5 class="col-5"> Email </h5>
+      <h5 class="col-2"> Số bài đăng </h5>
+      <h5 class="col-1"> ID </h5>
+      <hr class="col-11">
+
+      <% @users.each do |user| %>
+        <li class="col-1"> <%= image_tag user.avatar %> </li>
+        <li class="col-3"> <%= user.name %> </li>
+        <li class="col-5"> <%= user.email %> </li>
+        <li class="col-2"> <%= @user.snapshots.count %> </li>
+        <li class="col-1"><%= link_to user.id, user %></li>
+      <% end %>
+    </div>
+
+    <%= link_to "New user", new_user_path %>
+  </div>
+
+  <div class="col-2"></div>
+</div>
